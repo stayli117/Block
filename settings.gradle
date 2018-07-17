@@ -1,0 +1,3 @@
+include ':walletlib',':walletlibrarycore', ':wallet'
+
+include /*':app',*/ ':integration-android', ':lifecycle_android'

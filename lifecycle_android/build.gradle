@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "net.people.lifecycle_android"
+        minSdkVersion 23
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+    }
+    dataBinding {
+        enabled = true
+    }
+
+//    flavorDimensions 'mode'
+//
+//    productFlavors {
+//        honor9 {
+//            dimension 'mode'
+//            versionNameSuffix 'honor9'
+//            applicationId "net.people.lifecycle_android.honor9"
+//        }
+//
+//        honor8 {
+//            dimension 'mode'
+//            versionNameSuffix 'honor8'
+//            applicationId "net.people.lifecycle_android.honor8"
+//        }
+//
+//    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    compile 'com.android.support:support-v4:27.1.1'
+    compile 'com.android.support:design:27.1.1'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    compile 'android.arch.lifecycle:extensions:1.1.1'
+    //Room
+    implementation 'android.arch.persistence.room:runtime:1.1.0'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.0"
+    //NetWork
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.3.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    //dagger
+    compile 'com.google.dagger:dagger:2.8'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.8'
+    compile 'com.jude:easyrecyclerview:4.4.2'
+    compile 'com.github.bumptech.glide:glide:4.7.1'
+}
